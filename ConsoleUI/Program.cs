@@ -11,9 +11,36 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            // CRUDTest();
+
+            CarDetailsTest();
+
+        }
+
+        private static void CarDetailsTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var item in carManager.GetCarDetails())
+            {
+                Console.WriteLine
+                    (
+                    item.CarName + "/" +
+                    item.BrandName + "/" +
+                    item.ColorName + "/" +
+                    item.DailyPrice
+                    );
+            }
+        }
+        private static void CRUDTest()
+        {
             Car car1 = new Car
             {
-                Id=5,BrandId=2 ,ColorId = 1, DailyPrice = 320, Description = "Beyaz Volkswagen BluMotion", ModelYear = 2012
+                Id = 5,
+                BrandId = 2,
+                ColorId = 1,
+                DailyPrice = 320,
+                Description = "Beyaz Volkswagen BluMotion",
+                ModelYear = 2012
             };
 
             Color color1 = new Color
