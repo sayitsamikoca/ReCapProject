@@ -11,5 +11,6 @@ namespace Business.Abstract
         bool Delete(Color color);
         bool Update(Color color);
         List<Color> GetAll();
+        Color GetById(int colorId);
     }
 }
