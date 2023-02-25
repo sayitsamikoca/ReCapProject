@@ -30,17 +30,36 @@ namespace Business.Concrete
 
         public bool Delete(Brand brand)
         {
-            throw new NotImplementedException();
+            if (_brandDal.Delete(brand))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<Brand> GetAll()
         {
-            throw new NotImplementedException();
+            return _brandDal.GetAll();
+        }
+
+        public Brand GetById(int brandId)
+        {
+            return _brandDal.Get(b => b.Id == brandId);
         }
 
         public bool Update(Brand brand)
         {
-            throw new NotImplementedException();
+            if (_brandDal.Update(brand))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

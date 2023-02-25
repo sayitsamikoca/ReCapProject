@@ -30,17 +30,36 @@ namespace Business.Concrete
 
         public bool Delete(Color color)
         {
-            throw new NotImplementedException();
+            if (_colorDal.Delete(color))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<Color> GetAll()
         {
-            throw new NotImplementedException();
+            return _colorDal.GetAll();
+        }
+
+        public Color GetById(int colorId)
+        {
+            return _colorDal.Get(c => c.Id == colorId);
         }
 
         public bool Update(Color color)
         {
-            throw new NotImplementedException();
+            if (_colorDal.Update(color))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

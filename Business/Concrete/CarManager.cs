@@ -28,12 +28,26 @@ namespace Business.Concrete
             }
         }
 
+        public bool Delete(Car car)
+        {
+            if (_carDal.Delete(car))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public List<Car> GetAll()
         {
-            // İş Kodları
-            // Yetkisi var mı?
-
             return _carDal.GetAll();
+        }
+
+        public Car GetById(int carId)
+        {
+            return _carDal.Get(c => c.Id == carId);
         }
 
         public List<Car> GetCarsBrandId(int id)
@@ -44,6 +58,18 @@ namespace Business.Concrete
         public List<Car> GetCarsByColorId(int id)
         {
             return _carDal.GetAll(c => c.ColorId == id);
+        }
+
+        public bool Update(Car car)
+        {
+            if (_carDal.Update(car))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
