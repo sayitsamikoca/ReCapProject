@@ -2,6 +2,7 @@
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,14 +13,31 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             // CRUDTest();
+            //CarDetailsTest();
 
-            CarDetailsTest();
+            CarManager carManager = new CarManager(new EfCarDal());
+
+            var result = carManager.GetCarDetails();
+
+            if (result.Succes)
+            {
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " / " + car.DailyPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
 
         }
 
         private static void CarDetailsTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
+
+            /*
             foreach (var item in carManager.GetCarDetails())
             {
                 Console.WriteLine
@@ -30,6 +48,7 @@ namespace ConsoleUI
                     item.DailyPrice
                     );
             }
+            */
         }
         private static void CRUDTest()
         {
