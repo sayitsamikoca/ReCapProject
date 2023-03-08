@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace Business.Concrete
@@ -16,65 +19,70 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public bool Add(Car car)
+        public IResult Add(Car car)
         {
             if (car.Description.Length < 2 || car.DailyPrice <= 0)
             {
-                return false;
+                return new SuccesResult(Messages.CarNameInvalid);
             }
             else
             {
                 _carDal.Add(car);
-                return true;
+                return new ErrorResult(Messages.CarAdded);
             }
         }
 
-        public bool Delete(Car car)
+        public IResult Delete(Car car)
         {
             if (_carDal.Delete(car))
             {
-                return true;
+                return new SuccesResult(Messages.CarDeleted);
             }
             else
             {
-                return false;
+                return new ErrorResult(Messages.CarNotFound);
             }
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+            return new SuccesDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
 
-        public Car GetById(int carId)
+        public IDataResult<Car> GetById(int carId)
         {
-            return _carDal.Get(c => c.Id == carId);
+            return new SuccesDataResult<Car>(_carDal.Get(c => c.Id == carId));
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetCarDetails();
+            if (DateTime.Now.Hour == 17)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccesDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarDetailsListed);
+
         }
 
-        public List<Car> GetCarsBrandId(int id)
+        public IDataResult<List<Car>> GetCarsBrandId(int id)
         {
-            return _carDal.GetAll(c => c.BrandId == id);
+            return new SuccesDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(c => c.ColorId == id);
+            return new SuccesDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
         }
 
-        public bool Update(Car car)
+        public IResult Update(Car car)
         {
             if (_carDal.Update(car))
             {
-                return true;
+                return new SuccesResult(Messages.CarUpdated);
             }
             else
             {
-                return false;
+                return new ErrorResult("Araba Güncellenemedi");
             }
         }
     }
