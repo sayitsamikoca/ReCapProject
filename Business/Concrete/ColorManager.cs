@@ -28,7 +28,7 @@ namespace Business.Concrete
             else
             {
                 _colorDal.Add(color);
-                return new SuccesResult(Messages.InsertSuccesful);
+                return new SuccesResult(Messages.InsertSuccessful);
             }
         }
 

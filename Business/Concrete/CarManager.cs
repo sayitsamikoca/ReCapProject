@@ -46,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccesDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
+            return new SuccesDataResult<List<Car>>(_carDal.GetAll(), Messages.ListingSuccessul);
         }
 
         public IDataResult<Car> GetById(int carId)
@@ -78,11 +78,11 @@ namespace Business.Concrete
         {
             if (_carDal.Update(car))
             {
-                return new SuccesResult(Messages.CarUpdated);
+                return new SuccesResult(Messages.SuccessfullyUpdated);
             }
             else
             {
-                return new ErrorResult("Araba Güncellenemedi");
+                return new ErrorResult(Messages.UpdateFailed);
             }
         }
     }
