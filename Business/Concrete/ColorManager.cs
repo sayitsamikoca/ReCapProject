@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Business.Concrete
@@ -15,50 +18,60 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-        public bool Add(Color color)
+        public IResult Add(Color color)
         {
             if (string.IsNullOrWhiteSpace(color.Name))
             {
-                return false;
+                // return false;
+                return new ErrorResult(Messages.NameInvalid);
             }
             else
             {
                 _colorDal.Add(color);
-                return true;
+                return new SuccesResult(Messages.InsertSuccesful);
             }
         }
 
-        public bool Delete(Color color)
+        public IResult Delete(Color color)
         {
             if (_colorDal.Delete(color))
             {
-                return true;
+                return new SuccesResult();
             }
             else
             {
-                return false;
+                return new ErrorResult(Messages.DeleteFailed);
             }
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.GetAll();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
+            }
+
+            else
+            {
+                return new SuccesDataResult<List<Color>>();
+            }
+
         }
 
-        public Color GetById(int colorId)
+        public IDataResult<Color> GetById(int colorId)
         {
-            return _colorDal.Get(c => c.Id == colorId);
+            return new SuccesDataResult<Color>(_colorDal.Get(c => c.Id == colorId));
         }
 
-        public bool Update(Color color)
+        public IResult Update(Color color)
         {
             if (_colorDal.Update(color))
             {
-                return true;
+                return new SuccesResult(Messages.SuccessfullyUpdated);
             }
             else
             {
-                return false;
+                return new ErrorResult(Messages.UpdateFailed);
             }
         }
     }
