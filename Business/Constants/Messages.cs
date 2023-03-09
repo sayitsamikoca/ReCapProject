@@ -11,7 +11,7 @@ namespace Business.Constants
         public static string CarDeleted = "Araba Silindi.";
         public static string CarNotFound = "Sistemde kayıtlı araba bulunamadı";
         public static string SuccessfullyUpdated = "Başarıyla Güncellendi";
-        public static string CarListed = "Araba Listelendi";
+        public static string ListingSuccessul = "Listeleme Başarılı";
         public static string CarDetailsListed = "Araba Detayları Listelendi";
         public static string MaintenanceTime = "Sistem bakımda !";
         public static string DeleteFailed = "Silme işlemi Başarısız oldu.";
