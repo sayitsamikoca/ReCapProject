@@ -74,17 +74,17 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.Description = car.Description;
         }
 
-        bool IEntityRepository<Car>.Add(Car entity)
+        void IEntityRepository<Car>.Add(Car entity)
         {
             throw new NotImplementedException();
         }
 
-        bool IEntityRepository<Car>.Delete(Car entity)
+        void IEntityRepository<Car>.Delete(Car entity)
         {
             throw new NotImplementedException();
         }
 
-        bool IEntityRepository<Car>.Update(Car entity)
+        void IEntityRepository<Car>.Update(Car entity)
         {
             throw new NotImplementedException();
         }
