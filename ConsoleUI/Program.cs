@@ -14,7 +14,23 @@ namespace ConsoleUI
         {
             // CRUDTest();
             //CarDetailsTest();
+            //GetCarDetailsResultsTest();
 
+            Customer customer1 = new Customer { UserId = 1, CompanyName = "TestCompanyOne" };
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            var result = customerManager.Add(customer1);
+
+            if (result.Succes)
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
+
+        }
+
+        private static void GetCarDetailsResultsTest()
+        {
             CarManager carManager = new CarManager(new EfCarDal());
 
             var result = carManager.GetCarDetails();
@@ -30,9 +46,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-
         }
-
         private static void CarDetailsTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
