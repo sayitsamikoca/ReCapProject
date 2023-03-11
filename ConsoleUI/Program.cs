@@ -16,7 +16,7 @@ namespace ConsoleUI
             //CarDetailsTest();
             //GetCarDetailsResultsTest();
 
-            Customer customer1 = new Customer { UserId = 1, CompanyName = "TestCompanyOne" };
+            Customer customer1 = new Customer { Id=2,UserId = 1, CompanyName = "TestCompanyTwo" };
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             var result = customerManager.Add(customer1);
 
