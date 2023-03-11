@@ -16,5 +16,6 @@ namespace Business.Constants
         public static string MaintenanceTime = "Sistem bakımda !";
         public static string DeleteFailed = "Silme işlemi Başarısız oldu.";
         public static string UpdateFailed = "Güncelleme işlemi Başarısız oldu.";
+        public static string RentalFailed = "Kiralama işlemi Başarısız oldu.";
     }
 }
