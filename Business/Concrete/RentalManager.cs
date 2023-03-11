@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,8 @@ namespace Business.Concrete
 
         public IResult Delete(Rental rental)
         {
-            if (_rentalDal.Delete(rental))
-            {
-                return new SuccesResult();
-            }
-            return new ErrorResult(Messages.DeleteFailed);
+            _rentalDal.Delete(rental);
+            return new SuccesResult();
 
         }
 
@@ -45,12 +43,8 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            if (_rentalDal.Update(rental))
-            {
-                return new SuccesResult(Messages.SuccessfullyUpdated);
-            }
-
-            return new ErrorResult(Messages.UpdateFailed);
+            _rentalDal.Update(rental);
+            return new SuccesResult(Messages.SuccessfullyUpdated);
         }
     }
 }

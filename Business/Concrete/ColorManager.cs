@@ -22,7 +22,6 @@ namespace Business.Concrete
         {
             if (string.IsNullOrWhiteSpace(color.Name))
             {
-                // return false;
                 return new ErrorResult(Messages.NameInvalid);
             }
             else
@@ -34,14 +33,8 @@ namespace Business.Concrete
 
         public IResult Delete(Color color)
         {
-            if (_colorDal.Delete(color))
-            {
-                return new SuccesResult();
-            }
-            else
-            {
-                return new ErrorResult(Messages.DeleteFailed);
-            }
+            _colorDal.Delete(color);
+            return new SuccesResult();
         }
 
         public IDataResult<List<Color>> GetAll()
@@ -65,14 +58,8 @@ namespace Business.Concrete
 
         public IResult Update(Color color)
         {
-            if (_colorDal.Update(color))
-            {
-                return new SuccesResult(Messages.SuccessfullyUpdated);
-            }
-            else
-            {
-                return new ErrorResult(Messages.UpdateFailed);
-            }
+            _colorDal.Update(color);
+            return new SuccesResult(Messages.SuccessfullyUpdated);
         }
     }
 }

@@ -21,16 +21,14 @@ namespace Business.Concrete
 
         public IResult Add(Customer customer)
         {
+            _customerDal.Add(customer);
             return new SuccesResult(Messages.InsertSuccessful);
         }
 
         public IResult Delete(Customer customer)
         {
-            if (_customerDal.Delete(customer))
-            {
-                return new SuccesResult();
-            }
-            return new ErrorResult(Messages.DeleteFailed);
+            _customerDal.Delete(customer);
+            return new SuccesResult();
         }
 
         public IDataResult<List<Customer>> GetAll()
@@ -45,12 +43,8 @@ namespace Business.Concrete
 
         public IResult Update(Customer customer)
         {
-            if (_customerDal.Update(customer))
-            {
-                return new SuccesResult(Messages.SuccessfullyUpdated);
-            }
-
-            return new ErrorResult(Messages.UpdateFailed);
+            _customerDal.Update(customer);
+            return new SuccesResult(Messages.SuccessfullyUpdated);
         }
     }
 }

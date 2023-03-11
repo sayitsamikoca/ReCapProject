@@ -34,14 +34,9 @@ namespace Business.Concrete
 
         public IResult Delete(Car car)
         {
-            if (_carDal.Delete(car))
-            {
-                return new SuccesResult(Messages.CarDeleted);
-            }
-            else
-            {
-                return new ErrorResult(Messages.CarNotFound);
-            }
+            _carDal.Delete(car);
+            return new SuccesResult(Messages.CarDeleted);
+        
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -76,14 +71,8 @@ namespace Business.Concrete
 
         public IResult Update(Car car)
         {
-            if (_carDal.Update(car))
-            {
-                return new SuccesResult(Messages.SuccessfullyUpdated);
-            }
-            else
-            {
-                return new ErrorResult(Messages.UpdateFailed);
-            }
+            _carDal.Update(car);
+            return new SuccesResult(Messages.SuccessfullyUpdated);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -21,17 +22,15 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
+            _userDal.Add(user);
             return new SuccesResult(Messages.InsertSuccessful);
         }
 
         public IResult Delete(User user)
         {
-            if (_userDal.Delete(user))
-            {
-                return new SuccesResult();
-            }
-            return new ErrorResult(Messages.DeleteFailed);
-         
+            _userDal.Delete(user);
+            return new SuccesResult();
+
         }
 
         public IDataResult<List<User>> GetAll()
@@ -46,12 +45,8 @@ namespace Business.Concrete
 
         public IResult Update(User user)
         {
-            if (_userDal.Update(user))
-            {
-                return new SuccesResult(Messages.SuccessfullyUpdated);
-            }
-
-            return new ErrorResult(Messages.UpdateFailed);
+            _userDal.Update(user);
+            return new SuccesResult(Messages.SuccessfullyUpdated);
         }
     }
 }
