@@ -46,7 +46,7 @@ namespace Business.Concrete
 
             else
             {
-                return new SuccesDataResult<List<Color>>();
+                return new SuccesDataResult<List<Color>>(_colorDal.GetAll());
             }
 
         }
