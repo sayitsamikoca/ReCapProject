@@ -81,7 +81,7 @@ namespace WebAPI.Controllers
         [HttpPut("update")]
         public IActionResult Update(Car car)
         {
-            var result = _carService.Add(car);
+            var result = _carService.Update(car);
             if (result.Succes)
             {
                 return Ok(result);
